@@ -5,6 +5,7 @@ ptb folder: contains original Penn Tree Bank dataset
 ptb_word_lm.py : maine file
 lstm_variants.py: contains various LSTM variations for ablations
 results_sample: Contains the sample output of a particular run 
+Documentation: Information about LSTM and preliminary results
 
 '''Required libraries''':
 python 3.6.4
