@@ -1,0 +1,168 @@
+{\rtf1\ansi\ansicpg1252\deff0\nouicompat\deflang1033{\fonttbl{\f0\froman\fprq2\fcharset0 Times New Roman;}{\f1\fswiss\fprq2\fcharset0 Arial;}{\f2\fswiss\fprq2 Arial;}{\f3\fswiss\fprq2\fcharset0 Calibri;}{\f4\fnil\fcharset0 Calibri;}{\f5\fnil\fcharset2 Symbol;}}
+{\colortbl ;\red0\green0\blue255;}
+{\*\generator Riched20 10.0.18362}\viewkind4\uc1 
+\pard\widctlpar\sl-207\slmult0\f0\fs20\lang16393\par
+
+\pard{\pntext\f5\'B7\tab}{\*\pn\pnlvlblt\pnf5\pnindent0{\pntxtb\'B7}}\widctlpar\fi-464\li1540\tx1540\f1\fs29 Introduction\par
+
+\pard\widctlpar\sl-211\slmult0\f0\fs20\par
+
+\pard\widctlpar\li1080\ri1120\sl264\slmult1\qj\f1\fs21 Long-short term memory (commonly known as LSTM) neural networks are widely used for their ability to handle temporal dynamic behaviour. The paper "Long Short-Term Memory as a Dynamically Computed Element-wise Weighted Sum" [1] provides a di\f2\u-1280?\f1 erent view to the success of LSTM. The paper states that gates themselves are powerful recurrent models that provide more representational power than previously realized. In order to prove it, the authors perform di\f2\u-1280?\f1 erent LSTM ablations on four main applica-tions of NLP. The paper also mathematically proves that the LSTM variant "LSTM-SRNN-OUT (Remove S-RNN and OUTPUT gate from LSTM) can be condensed into element wise weighted sum of the previous layers.\par
+
+\pard\widctlpar\sl-244\slmult0\f0\fs20\par
+
+\pard\widctlpar\li1080\ri1120\sl252\slmult1\qj\f1\fs22 The report describes the implementation of the above titled paper for the task of word level language modelling. The implementation is done on Penn Tree Bank dataset for a fixed set of hyper-parameters. Results of the im-plementation are similar to the original paper. Perplexity scores of di\f2\u-1280?\f1 erent LSTM variants clearly shows that the gating mechanism alone performs as well as an LSTM in most settings.\par
+
+\pard\widctlpar\sl-340\slmult0\f0\fs20\par
+
+\pard{\pntext\f5\'B7\tab}{\*\pn\pnlvlblt\pnf5\pnindent0{\pntxtb\'B7}}\widctlpar\fi-464\li1540\tx1540\f1\fs29 Motivation\par
+
+\pard\widctlpar\sl-211\slmult0\f0\fs20\par
+
+\pard\widctlpar\li1080\ri1120\sl252\slmult1\qj\f1\fs22 The success of LSTMs are largely owned to their ability to combat vanish-ing gradient problem in Recurrent Neural Networks(RNN). Memory gates present in LSTM mitigate it. The study reveals an alternative view to the wide success of LSTM. It states that gates themselves are powerful recurrent models. Thus, it mathematically as well as empirically provides a new direc-tion in which LSTMs can be viewed. The authors\rquote  break down the internal structure of the cell into di\f2\u-1280?\f1 erent sub-components and ablate it. This is first study to provide comparison between LSTMs with and without recurrent layer. It focuses on explaining what LSTMs are learning. This can be very helpful for research especially from the optimisation point of view. Also, there is no publicly available implementation for the above paper. Thus, it provides immense motivation to reproduce the experiment and get more insights.\par
+\par
+
+\pard\widctlpar\sl-200\slmult0\f0\fs20\par
+
+\pard\widctlpar\sl-253\slmult0\par
+
+\pard\widctlpar\li8140\f1\fs22 2\par
+
+\pard\widctlpar\sl-200\slmult0\f0\fs20\par
+
+\pard\widctlpar\sl-207\slmult0\par
+
+\pard{\pntext\f5\'B7\tab}{\*\pn\pnlvlblt\pnf5\pnindent0{\pntxtb\'B7}}\widctlpar\fi-464\li1540\tx1540\f1\fs29 Experimental Setup and Results\par
+
+\pard\widctlpar\sl-211\slmult0\f0\fs20\par
+
+\pard\widctlpar\li1080\ri1040\sl240\slmult1\qj\f1\fs22 The experiment implements the task of language modelling. It predicts the next word in the sequence. The dataset used is Pen Tree Bank dataset(PTB){\f3\fs20{\field{\*\fldinst{HYPERLINK "\\l "}}{\fldrslt{\ul\cf1\super\f1\fs31 1}}}}\f1\fs22 . It contains data for training, validation and testing. The vocabulary size is 10,000 words. The implementation is written in Python language. The most important Python libraries to be used are numpy and tensorflow. The tensorflow o\f2\u-1277?\f1 cial tutorial is referenced [2] for implementation. The hyper-parameters used in the model are as follows.\par
+
+\pard\widctlpar\sl-383\slmult0\f0\fs20\par
+\trowd\trgaph10\trleft1080\trrh279\trpaddl10\trpaddr10\trpaddfl3\trpaddfr3
+\clvertalb\clbrdrl\brdrw20\brdrs\clbrdrt\brdrw20\brdrs\clbrdrr\brdrw20\brdrs\clbrdrb\brdrw20\brdrs \cellx2840\clvertalb\clbrdrt\brdrw20\brdrs\clbrdrr\brdrw20\brdrs\clbrdrb\brdrw20\brdrs \cellx8680 
+\pard\intbl\widctlpar\qc\charscalex95\f1\fs22 Parameter\cell\charscalex98 Description\cell\row\trowd\trgaph10\trleft1080\trrh259\trpaddl10\trpaddr10\trpaddfl3\trpaddfr3
+\clvertalb\clbrdrl\brdrw20\brdrs\clbrdrr\brdrw20\brdrs\clbrdrb\brdrw20\brdrs \cellx2840\clvertalb\clbrdrr\brdrw20\brdrs\clbrdrb\brdrw20\brdrs \cellx8680 
+\pard\intbl\widctlpar\qc init scale\cell initial scale of the weights\cell\row\trowd\trgaph10\trleft1080\trrh259\trpaddl10\trpaddr10\trpaddfl3\trpaddfr3
+\clvertalb\clbrdrl\brdrw20\brdrs\clbrdrr\brdrw20\brdrs\clbrdrb\brdrw20\brdrs \cellx2840\clvertalb\clbrdrr\brdrw20\brdrs\clbrdrb\brdrw20\brdrs \cellx8680 
+\pard\intbl\widctlpar\qc learning rate\cell\charscalex0 initial value of the learning rate\cell\row\trowd\trgaph10\trleft1080\trrh259\trpaddl10\trpaddr10\trpaddfl3\trpaddfr3
+\clvertalb\clbrdrl\brdrw20\brdrs\clbrdrr\brdrw20\brdrs\clbrdrb\brdrw20\brdrs \cellx2840\clvertalb\clbrdrr\brdrw20\brdrs\clbrdrb\brdrw20\brdrs \cellx8680 
+\pard\intbl\widctlpar\qc\charscalex98 max grad norm\cell maximum permissible norm of the gradient\cell\row\trowd\trgaph10\trleft1080\trrh259\trpaddl10\trpaddr10\trpaddfl3\trpaddfr3
+\clvertalb\clbrdrl\brdrw20\brdrs\clbrdrr\brdrw20\brdrs\clbrdrb\brdrw20\brdrs \cellx2840\clvertalb\clbrdrr\brdrw20\brdrs\clbrdrb\brdrw20\brdrs \cellx8680 
+\pard\intbl\widctlpar\qc\charscalex94 num layers\cell\charscalex98 number of LSTM layers\cell\row\trowd\trgaph10\trleft1080\trrh259\trpaddl10\trpaddr10\trpaddfl3\trpaddfr3
+\clvertalb\clbrdrl\brdrw20\brdrs\clbrdrr\brdrw20\brdrs\clbrdrb\brdrw20\brdrs \cellx2840\clvertalb\clbrdrr\brdrw20\brdrs\clbrdrb\brdrw20\brdrs \cellx8680 
+\pard\intbl\widctlpar\qc\charscalex94 num steps\cell\charscalex98 number of unrolled steps of LSTM\cell\row\trowd\trgaph10\trleft1080\trrh259\trpaddl10\trpaddr10\trpaddfl3\trpaddfr3
+\clvertalb\clbrdrl\brdrw20\brdrs\clbrdrr\brdrw20\brdrs\clbrdrb\brdrw20\brdrs \cellx2840\clvertalb\clbrdrr\brdrw20\brdrs\clbrdrb\brdrw20\brdrs \cellx8680 
+\pard\intbl\widctlpar\qc\charscalex95 hidden size\cell\charscalex0 number of LSTM units\cell\row\trowd\trgaph10\trleft1080\trrh259\trpaddl10\trpaddr10\trpaddfl3\trpaddfr3
+\clvertalb\clbrdrl\brdrw20\brdrs\clbrdrr\brdrw20\brdrs\clbrdrb\brdrw20\brdrs \cellx2840\clvertalb\clbrdrr\brdrw20\brdrs\clbrdrb\brdrw20\brdrs \cellx8680 
+\pard\intbl\widctlpar\qc\charscalex94 max epoch\cell\charscalex0 no. of epochs trained with the initial learning rate\cell\row\trowd\trgaph10\trleft1080\trrh259\trpaddl10\trpaddr10\trpaddfl3\trpaddfr3
+\clvertalb\clbrdrl\brdrw20\brdrs\clbrdrr\brdrw20\brdrs\clbrdrb\brdrw20\brdrs \cellx2840\clvertalb\clbrdrr\brdrw20\brdrs\clbrdrb\brdrw20\brdrs \cellx8680 
+\pard\intbl\widctlpar\qc\charscalex96 max max epoch\cell\charscalex0 total number of epochs for training\cell\row\trowd\trgaph10\trleft1080\trrh259\trpaddl10\trpaddr10\trpaddfl3\trpaddfr3
+\clvertalb\clbrdrl\brdrw20\brdrs\clbrdrr\brdrw20\brdrs\clbrdrb\brdrw20\brdrs \cellx2840\clvertalb\clbrdrr\brdrw20\brdrs\clbrdrb\brdrw20\brdrs \cellx8680 
+\pard\intbl\widctlpar\qc\charscalex93 keep prob\cell\charscalex99 probability of keeping weights in the dropout layer\cell\row\trowd\trgaph10\trleft1080\trrh259\trpaddl10\trpaddr10\trpaddfl3\trpaddfr3
+\clvertalb\clbrdrl\brdrw20\brdrs\clbrdrr\brdrw20\brdrs\clbrdrb\brdrw20\brdrs \cellx2840\clvertalb\clbrdrr\brdrw20\brdrs\clbrdrb\brdrw20\brdrs \cellx8680 
+\pard\intbl\widctlpar\qc\charscalex96 lr decay\cell 
+\pard\intbl\widctlpar\sl-259\slmult0\qc\charscalex0\fs21 decay of the learning rate for each epoch after "max\sub\fs30 e\nosupersub\fs21 poch"\cell\row\trowd\trgaph10\trleft1080\trrh259\trpaddl10\trpaddr10\trpaddfl3\trpaddfr3
+\clvertalb\clbrdrl\brdrw20\brdrs\clbrdrr\brdrw20\brdrs\clbrdrb\brdrw20\brdrs \cellx2840\clvertalb\clbrdrr\brdrw20\brdrs\clbrdrb\brdrw20\brdrs \cellx8680 
+\pard\intbl\widctlpar\qc\charscalex94\fs22 batch size\cell batch size\cell\row 
+\pard\widctlpar\sl-145\slmult0\charscalex0\f0\fs20\par
+
+\pard\widctlpar\li1080\ri1120\sl264\slmult1\qj\f1\fs22 The implementation contains three di\f2\u-1280?\f1 erent configurations for the above parameters. The below table defines the configurations- small, medium and large used in the implementation.\par
+
+\pard\widctlpar\sl-20\slmult0\f0\fs20\par
+
+\pard\widctlpar\sl-131\slmult0\par
+
+\pard{\pntext\f5\'B7\tab}{\*\pn\pnlvlblt\pnf5\pnindent0{\pntxtb\'B7}}\widctlpar\fi245\li1080\ri1120\tx1412 {\f3{\field{\*\fldinst{HYPERLINK "https://github.com/townie/PTB-dataset-from-Tomas-Mikolov-s-webpage/tree/master/data" }}{\fldrslt{\ul\cf1\f1\fs17 https://github.com/townie/PTB-dataset-from-Tomas-Mikolov-s-webpage/tree/}}}}\f1\fs17  {\f3\fs20{\field{\*\fldinst{HYPERLINK "https://github.com/townie/PTB-dataset-from-Tomas-Mikolov-s-webpage/tree/master/data" }}{\fldrslt{\ul\cf1\f1\fs17 master/data}}}}\f1\fs17\par
+
+\pard\widctlpar\fi245\li1080\ri1120\tx1412\par
+
+\pard\widctlpar\sl-200\slmult0\f0\fs20\par
+
+\pard\widctlpar\sl-253\slmult0\par
+
+\pard\widctlpar\ri1120\qr\f1\fs22 3\par
+
+\pard\widctlpar\sl-200\slmult0\f0\fs20\par
+
+\pard\widctlpar\sl-230\slmult0\par
+\trowd\trgaph10\trleft1480\trrh279\trpaddl10\trpaddr10\trpaddfl3\trpaddfr3
+\clvertalb\clbrdrl\brdrw20\brdrs\clbrdrt\brdrw20\brdrs\clbrdrr\brdrw20\brdrs\clbrdrb\brdrw20\brdrs \cellx3240\clvertalb\clbrdrt\brdrw20\brdrs\clbrdrr\brdrw20\brdrs\clbrdrb\brdrw20\brdrs \cellx4700\clvertalb\clbrdrt\brdrw20\brdrs\clbrdrr\brdrw20\brdrs\clbrdrb\brdrw20\brdrs \cellx6400\clvertalb\clbrdrt\brdrw20\brdrs\clbrdrr\brdrw20\brdrs\clbrdrb\brdrw20\brdrs \cellx7860 
+\pard\intbl\widctlpar\qc\charscalex95\f1\fs22 Parameter\cell 
+\pard\intbl\widctlpar\li100\charscalex0 Small Config\cell Medium Config\cell Large Config\cell\row\trowd\trgaph10\trleft1480\trrh259\trpaddl10\trpaddr10\trpaddfl3\trpaddfr3
+\clvertalb\clbrdrl\brdrw20\brdrs\clbrdrr\brdrw20\brdrs\clbrdrb\brdrw20\brdrs \cellx3240\clvertalb\clbrdrr\brdrw20\brdrs\clbrdrb\brdrw20\brdrs \cellx4700\clvertalb\clbrdrr\brdrw20\brdrs\clbrdrb\brdrw20\brdrs \cellx6400\clvertalb\clbrdrr\brdrw20\brdrs\clbrdrb\brdrw20\brdrs \cellx7860 
+\pard\intbl\widctlpar\qc\charscalex98 init scale\cell\charscalex84 0.1\cell\charscalex88 0.05\cell 0.04\cell\row\trowd\trgaph10\trleft1480\trrh259\trpaddl10\trpaddr10\trpaddfl3\trpaddfr3
+\clvertalb\clbrdrl\brdrw20\brdrs\clbrdrr\brdrw20\brdrs\clbrdrb\brdrw20\brdrs \cellx3240\clvertalb\clbrdrr\brdrw20\brdrs\clbrdrb\brdrw20\brdrs \cellx4700\clvertalb\clbrdrr\brdrw20\brdrs\clbrdrb\brdrw20\brdrs \cellx6400\clvertalb\clbrdrr\brdrw20\brdrs\clbrdrb\brdrw20\brdrs \cellx7860 
+\pard\intbl\widctlpar\qc\charscalex98 learning rate\cell\charscalex84 1.0\cell 1.0\cell\charscalex91 1.0\cell\row\trowd\trgaph10\trleft1480\trrh259\trpaddl10\trpaddr10\trpaddfl3\trpaddfr3
+\clvertalb\clbrdrl\brdrw20\brdrs\clbrdrr\brdrw20\brdrs\clbrdrb\brdrw20\brdrs \cellx3240\clvertalb\clbrdrr\brdrw20\brdrs\clbrdrb\brdrw20\brdrs \cellx4700\clvertalb\clbrdrr\brdrw20\brdrs\clbrdrb\brdrw20\brdrs \cellx6400\clvertalb\clbrdrr\brdrw20\brdrs\clbrdrb\brdrw20\brdrs \cellx7860 
+\pard\intbl\widctlpar\qc\charscalex98 max grad norm\cell\charscalex81 5\cell 5\cell\charscalex89 10\cell\row\trowd\trgaph10\trleft1480\trrh259\trpaddl10\trpaddr10\trpaddfl3\trpaddfr3
+\clvertalb\clbrdrl\brdrw20\brdrs\clbrdrr\brdrw20\brdrs\clbrdrb\brdrw20\brdrs \cellx3240\clvertalb\clbrdrr\brdrw20\brdrs\clbrdrb\brdrw20\brdrs \cellx4700\clvertalb\clbrdrr\brdrw20\brdrs\clbrdrb\brdrw20\brdrs \cellx6400\clvertalb\clbrdrr\brdrw20\brdrs\clbrdrb\brdrw20\brdrs \cellx7860 
+\pard\intbl\widctlpar\qc\charscalex94 num layers\cell\charscalex81 2\cell 2\cell 2\cell\row\trowd\trgaph10\trleft1480\trrh259\trpaddl10\trpaddr10\trpaddfl3\trpaddfr3
+\clvertalb\clbrdrl\brdrw20\brdrs\clbrdrr\brdrw20\brdrs\clbrdrb\brdrw20\brdrs \cellx3240\clvertalb\clbrdrr\brdrw20\brdrs\clbrdrb\brdrw20\brdrs \cellx4700\clvertalb\clbrdrr\brdrw20\brdrs\clbrdrb\brdrw20\brdrs \cellx6400\clvertalb\clbrdrr\brdrw20\brdrs\clbrdrb\brdrw20\brdrs \cellx7860 
+\pard\intbl\widctlpar\qc\charscalex94 num steps\cell\charscalex89 20\cell 35\cell 35\cell\row\trowd\trgaph10\trleft1480\trrh259\trpaddl10\trpaddr10\trpaddfl3\trpaddfr3
+\clvertalb\clbrdrl\brdrw20\brdrs\clbrdrr\brdrw20\brdrs\clbrdrb\brdrw20\brdrs \cellx3240\clvertalb\clbrdrr\brdrw20\brdrs\clbrdrb\brdrw20\brdrs \cellx4700\clvertalb\clbrdrr\brdrw20\brdrs\clbrdrb\brdrw20\brdrs \cellx6400\clvertalb\clbrdrr\brdrw20\brdrs\clbrdrb\brdrw20\brdrs \cellx7860 
+\pard\intbl\widctlpar\qc\charscalex95 hidden size\cell\charscalex92 200\cell 650\cell\charscalex85 1500\cell\row\trowd\trgaph10\trleft1480\trrh259\trpaddl10\trpaddr10\trpaddfl3\trpaddfr3
+\clvertalb\clbrdrl\brdrw20\brdrs\clbrdrr\brdrw20\brdrs\clbrdrb\brdrw20\brdrs \cellx3240\clvertalb\clbrdrr\brdrw20\brdrs\clbrdrb\brdrw20\brdrs \cellx4700\clvertalb\clbrdrr\brdrw20\brdrs\clbrdrb\brdrw20\brdrs \cellx6400\clvertalb\clbrdrr\brdrw20\brdrs\clbrdrb\brdrw20\brdrs \cellx7860 
+\pard\intbl\widctlpar\qc\charscalex94 max epoch\cell\charscalex81 4\cell 6\cell\charscalex89 14\cell\row\trowd\trgaph10\trleft1480\trrh259\trpaddl10\trpaddr10\trpaddfl3\trpaddfr3
+\clvertalb\clbrdrl\brdrw20\brdrs\clbrdrr\brdrw20\brdrs\clbrdrb\brdrw20\brdrs \cellx3240\clvertalb\clbrdrr\brdrw20\brdrs\clbrdrb\brdrw20\brdrs \cellx4700\clvertalb\clbrdrr\brdrw20\brdrs\clbrdrb\brdrw20\brdrs \cellx6400\clvertalb\clbrdrr\brdrw20\brdrs\clbrdrb\brdrw20\brdrs \cellx7860 
+\pard\intbl\widctlpar\qc\charscalex96 max max epoch\cell\charscalex81 4\cell\charscalex89 10\cell 55\cell\row\trowd\trgaph10\trleft1480\trrh259\trpaddl10\trpaddr10\trpaddfl3\trpaddfr3
+\clvertalb\clbrdrl\brdrw20\brdrs\clbrdrr\brdrw20\brdrs\clbrdrb\brdrw20\brdrs \cellx3240\clvertalb\clbrdrr\brdrw20\brdrs\clbrdrb\brdrw20\brdrs \cellx4700\clvertalb\clbrdrr\brdrw20\brdrs\clbrdrb\brdrw20\brdrs \cellx6400\clvertalb\clbrdrr\brdrw20\brdrs\clbrdrb\brdrw20\brdrs \cellx7860 
+\pard\intbl\widctlpar\qc\charscalex96 keep prob\cell\charscalex84 1.0\cell 0.5\cell\charscalex88 0.35\cell\row\trowd\trgaph10\trleft1480\trrh259\trpaddl10\trpaddr10\trpaddfl3\trpaddfr3
+\clvertalb\clbrdrl\brdrw20\brdrs\clbrdrr\brdrw20\brdrs\clbrdrb\brdrw20\brdrs \cellx3240\clvertalb\clbrdrr\brdrw20\brdrs\clbrdrb\brdrw20\brdrs \cellx4700\clvertalb\clbrdrr\brdrw20\brdrs\clbrdrb\brdrw20\brdrs \cellx6400\clvertalb\clbrdrr\brdrw20\brdrs\clbrdrb\brdrw20\brdrs \cellx7860 
+\pard\intbl\widctlpar\qc\charscalex96 lr decay\cell\charscalex84 0.5\cell 0.8\cell\charscalex98 1/1.15\cell\row\trowd\trgaph10\trleft1480\trrh259\trpaddl10\trpaddr10\trpaddfl3\trpaddfr3
+\clvertalb\clbrdrl\brdrw20\brdrs\clbrdrr\brdrw20\brdrs\clbrdrb\brdrw20\brdrs \cellx3240\clvertalb\clbrdrr\brdrw20\brdrs\clbrdrb\brdrw20\brdrs \cellx4700\clvertalb\clbrdrr\brdrw20\brdrs\clbrdrb\brdrw20\brdrs \cellx6400\clvertalb\clbrdrr\brdrw20\brdrs\clbrdrb\brdrw20\brdrs \cellx7860 
+\pard\intbl\widctlpar\qc\charscalex94 batch size\cell\charscalex89 20\cell 20\cell 20\cell\row 
+\pard\widctlpar\sl-145\slmult0\charscalex0\f0\fs20\par
+
+\pard\widctlpar\li1080\ri1120\sl264\slmult1\qj\f1\fs22 Due to the slow execution time, the perplexity scores are computed only for small configuration. The test perplexity scores for various LSTM ablations are described in below table.\par
+
+\pard\widctlpar\sl-84\slmult0\f0\fs20\par
+\trowd\trgaph10\trleft2440\trrh279\trpaddl10\trpaddr10\trpaddfl3\trpaddfr3
+\clvertalb\clbrdrl\brdrw20\brdrs\clbrdrt\brdrw20\brdrs\clbrdrr\brdrw20\brdrs\clbrdrb\brdrw20\brdrs \cellx5220\clvertalb\clbrdrt\brdrw20\brdrs\clbrdrr\brdrw20\brdrs\clbrdrb\brdrw20\brdrs \cellx6900 
+\pard\intbl\widctlpar\qc\f1\fs22 Ablation\cell Test Perplexity\cell\row\trowd\trgaph10\trleft2440\trrh259\trpaddl10\trpaddr10\trpaddfl3\trpaddfr3
+\clvertalb\clbrdrl\brdrw20\brdrs\clbrdrr\brdrw20\brdrs\clbrdrb\brdrw20\brdrs \cellx5220\clvertalb\clbrdrr\brdrw20\brdrs\clbrdrb\brdrw20\brdrs \cellx6900 
+\pard\intbl\widctlpar\qc LSTM\cell\charscalex87 132.434\cell\row\trowd\trgaph10\trleft2440\trrh259\trpaddl10\trpaddr10\trpaddfl3\trpaddfr3
+\clvertalb\clbrdrl\brdrw20\brdrs\clbrdrr\brdrw20\brdrs\clbrdrb\brdrw20\brdrs \cellx5220\clvertalb\clbrdrr\brdrw20\brdrs\clbrdrb\brdrw20\brdrs \cellx6900 
+\pard\intbl\widctlpar\qc\charscalex0 LSTM - SRNN\cell\charscalex87 129.044\cell\row\trowd\trgaph10\trleft2440\trrh259\trpaddl10\trpaddr10\trpaddfl3\trpaddfr3
+\clvertalb\clbrdrl\brdrw20\brdrs\clbrdrr\brdrw20\brdrs\clbrdrb\brdrw20\brdrs \cellx5220\clvertalb\clbrdrr\brdrw20\brdrs\clbrdrb\brdrw20\brdrs \cellx6900 
+\pard\intbl\widctlpar\qc\charscalex0 LSTM - GATES\cell\charscalex87 655.695\cell\row\trowd\trgaph10\trleft2440\trrh259\trpaddl10\trpaddr10\trpaddfl3\trpaddfr3
+\clvertalb\clbrdrl\brdrw20\brdrs\clbrdrr\brdrw20\brdrs\clbrdrb\brdrw20\brdrs \cellx5220\clvertalb\clbrdrr\brdrw20\brdrs\clbrdrb\brdrw20\brdrs \cellx6900 
+\pard\intbl\widctlpar\qc\charscalex0 LSTM - SRNN - HIDDEN\cell\charscalex87 126.070\cell\row\trowd\trgaph10\trleft2440\trrh259\trpaddl10\trpaddr10\trpaddfl3\trpaddfr3
+\clvertalb\clbrdrl\brdrw20\brdrs\clbrdrr\brdrw20\brdrs\clbrdrb\brdrw20\brdrs \cellx5220\clvertalb\clbrdrr\brdrw20\brdrs\clbrdrb\brdrw20\brdrs \cellx6900 
+\pard\intbl\widctlpar\qc\charscalex0 LSTM - SRNN -OUT\cell\charscalex87 141.061\cell\row 
+\pard\widctlpar\sl-145\slmult0\charscalex0\f0\fs20\par
+
+\pard\widctlpar\li1080\ri1120\sl264\slmult1\qj\f1\fs22 The results clearly show that LSTM without GATES have very low perfor-mance whereas rest of LSTMs without SRNN or HIDDEN or OUT does not di\f2\u-1280?\f1 er much in performance.\par
+
+\pard\widctlpar\sl-331\slmult0\f0\fs20\par
+
+\pard{\pntext\f5\'B7\tab}{\*\pn\pnlvlblt\pnf5\pnindent0{\pntxtb\'B7}}\widctlpar\fi-464\li1540\tx1540\f1\fs29 Conclusion\par
+
+\pard\widctlpar\sl-211\slmult0\f0\fs20\par
+
+\pard\widctlpar\li1080\ri1120\sl264\slmult1\qj\f1\fs21 This report describes the implementation of the paper titled "Long Short-Term Memory as a Dynamically Computed Element-wise Weighted Sum". It reproduces the results for the task of language modelling. Both the paper and the reproduced implementation works on the same dataset (PTB). The implementation is done on a fixed set of parameters. Thus, it shows similar results to the paper and hence, we can empirically prove that the gates are doing much more in practice than just alleviating vanishing gradients.\par
+\par
+
+\pard\widctlpar\sl-200\slmult0\f0\fs20\par
+
+\pard\widctlpar\sl-253\slmult0\par
+
+\pard\widctlpar\li8140\f1\fs22 4\par
+
+\pard\widctlpar\sl-200\slmult0\f0\fs20\par
+
+\pard\widctlpar\sl-207\slmult0\par
+
+\pard{\pntext\f5\'B7\tab}{\*\pn\pnlvlblt\pnf5\pnindent0{\pntxtb\'B7}}\widctlpar\fi-464\li1540\tx1540\f1\fs29 References\par
+
+\pard\widctlpar\sl-211\slmult0\f0\fs20\par
+
+\pard\widctlpar\fi-4\li1080\ri1120\sl276\slmult1\qj\tx1418\f1\fs21 [1]\tab Omer Levy Kenton Lee Nicholas FitzGerald Luke Zettlemoyer, Long Short-Term Memory as a Dynamically Computed Element-wise Weighted Sum, Proceedings of the 56th Annual Meeting of the Association for Compu-tational Linguistics, pages 732\endash 739, Melbourne, Australia, July 15 - 20, 2018\par
+
+\pard\widctlpar\sl-232\slmult0\par
+
+\pard\widctlpar\fi-284\li1360\tx1360\fs22 [2]\tab Tensorflow tutorial: {{\field{\*\fldinst{HYPERLINK https://www.tensorflow.org/tutorials/sequences/recurrent }}{\fldrslt{https://www.tensorflow.org/tutorials/sequences/recurrent\ul0\cf0}}}}\f1\fs22\par
+
+\pard\sa200\sl276\slmult1\f4\lang9\par
+}
+ 
